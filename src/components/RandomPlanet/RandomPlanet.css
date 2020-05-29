@@ -1,0 +1,19 @@
+.RandomPlanet {
+    background-color: rgb(18, 18, 68);
+    padding: 10px 15px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+}
+
+.RandomPlanet .planet_block img{
+    width: 30%;
+}
+
+.RandomPlanet .planet_block .planet_info_block{
+    width: 70%;
+    list-style: none;
+}
+
+.RandomPlanet .planet_block .planet_info_block span:first-child {
+    margin-right: 10px;
+}

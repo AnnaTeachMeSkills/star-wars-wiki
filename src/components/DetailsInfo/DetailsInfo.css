@@ -1,0 +1,19 @@
+.DetailsInfo {
+    width: 49%;
+    background-color: rgb(18, 18, 68);
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.DetailsInfo .info_block{
+    align-items: center;
+}
+
+.DetailsInfo .info_block img {
+    width:40%;
+}
+
+.DetailsInfo .detail_info_block {
+    list-style: none;
+    padding-left: 15px;
+}
