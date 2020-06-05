@@ -3,21 +3,25 @@ import React from 'react';
 import SwapiService from '../../services/SwapiService';
 import './RandomPlanet.css';
 import Loader from '../Loader';
+import ErrorComponent from '../ErrorComponent';
 
 
 export default class RandomPlanet extends React.Component {
     
-    constructor() {
-        super();
-        this.upDatePlanet();
-    }
 
     swapi = new SwapiService();
 
     state = {
        planet: {},
        load: true,
+       error: false,
     }
+
+    componentDidMount () {
+        this.upDatePlanet();
+        setInterval(this.upDatePlanet, 5000);
+    }
+
 
     onPlanetLoaded = (planet) => {
         this.setState({
@@ -26,43 +30,64 @@ export default class RandomPlanet extends React.Component {
         });
     }
 
-    upDatePlanet() {
-        this.swapi.getAllPeople();
+    onError = () => {
+        this.setState({
+            error: true,
+            load: false,
+        });
+    }
+
+    upDatePlanet = () => {
         const id = Math.round(Math.random()*30);
-        this.swapi.getPlanet(id).then(this.onPlanetLoaded);
+        
+        this.swapi.getPlanet(id)
+            .then(this.onPlanetLoaded)
+            .catch(this.onError);
     }
 
     
     render() {
-
-
-        const { planet: {name, diameter, population, gravity, id}, load} = this.state;
+        const { planet, load, error } = this.state;
        
-        if (load) {
-            return <Loader />;
-        }
+        const errorContent = error ? <ErrorComponent /> : null;
+        const loader = load ? <Loader /> : null;
+        const content = (!load && !error)? <PlanetView planet={planet} /> : null;
 
         return (
             <div className='RandomPlanet'>
-                <h3>{name}</h3>
-                <div className="d-flex planet_block"> 
-                    <img src= {`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} alt='planet' />
-                    <ul className='planet_info_block'> 
-                        <li> 
-                            <span>diameter</span>
-                            <span>{ diameter }</span>
-                        </li>
-                        <li> 
-                            <span>population</span>
-                            <span>{ population }</span>
-                        </li>
-                        <li> 
-                            <span>gravity</span>
-                            <span>{ gravity }</span>
-                        </li>
-                    </ul>
-                </div>
+                {errorContent}
+                {loader}
+                {content}
             </div>
         );
     }
+}
+
+
+const PlanetView = ({planet}) => {
+
+    const { id, name, diameter, population, gravity } = planet;
+    
+    return (
+        <>
+            <h3>{name}</h3>
+            <div className="d-flex planet_block"> 
+                <img src= {`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} alt='planet' />
+                <ul className='planet_info_block'> 
+                    <li> 
+                        <span>diameter</span>
+                        <span>{ diameter }</span>
+                    </li>
+                    <li> 
+                        <span>population</span>
+                        <span>{ population }</span>
+                    </li>
+                    <li> 
+                        <span>gravity</span>
+                        <span>{ gravity }</span>
+                    </li>
+                </ul>
+            </div>
+        </>
+        );
 }

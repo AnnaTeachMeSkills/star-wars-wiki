@@ -1,0 +1,14 @@
+.ErrorComponent {
+    text-align: center;
+}
+
+.ErrorComponent > p {
+    display: flex;
+    flex-direction: column;
+    font-style: italic;
+    font-size: 20px;
+}
+
+.ErrorComponent img{
+    max-width: 80px;
+}

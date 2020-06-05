@@ -1,22 +1,41 @@
 import React from 'react';
 
 import './ItemsList.css'
+import SwapiService from '../../services/SwapiService';
 
-const ItemsList = () => {
+export default class ItemsList extends React.Component {
 
-    return (
-        <ul className='ItemsList'>
-            <li>
-                First Person
-            </li>
-            <li>
-                Second Person
-            </li>
-            <li>
-                Third Person
-            </li>
-        </ul>
-    );
+    swapi = new SwapiService();
+
+    state = {
+        people: null,
+    }
+
+    componentDidMount(){
+        this.swapi.getAllPeople().then((people) => {
+            this.setState({
+                people,
+            })
+        });
+    }
+
+
+
+    render () {
+        console.log(this.state.people)
+        return (
+            <ul className='ItemsList'>
+                <li>
+                    First Person
+                </li>
+                <li>
+                    Second Person
+                </li>
+                <li>
+                    Third Person
+                </li>
+            </ul>
+        );
+    }
+    
 }
-
-export default ItemsList;

@@ -8,19 +8,35 @@ import ItemsList from '../ItemsList';
 import DetailsInfo from '../DetailsInfo';
 
 
-const App = () => {
+export default class App extends React.Component {
 
-    return (
-        <div className='App'>
-            <Header />
-            <RandomPlanet />
-            <div className='d-flex justify-content-between'> 
-               <ItemsList /> 
-               <DetailsInfo />
+    state = {
+        isRandomPlanet: true,
+    }
+
+    onTogglePlanet = () => {
+        this.setState ((prevState) => {
+            return {isRandomPlanet: !prevState.isRandomPlanet,}
+        });
+    }
+
+    render() {
+        return (
+            <div className='App'>
+                <Header />
+                {this.state.isRandomPlanet && <RandomPlanet />}
+                <button 
+                    onClick={this.onTogglePlanet}>
+                    on/off planet
+                </button>
+                <div className='d-flex justify-content-between'> 
+                   <ItemsList /> 
+                   <DetailsInfo />
+                </div>
+                
             </div>
-            
-        </div>
-    )
+        )
+    }
+    
 }
 
-export default App;
