@@ -6,11 +6,11 @@
 }
 
 .RandomPlanet .planet_block img{
-    width: 30%;
+    width: 20%;
 }
 
 .RandomPlanet .planet_block .planet_info_block{
-    width: 70%;
+    width: 80%;
     list-style: none;
 }
 

@@ -41,9 +41,9 @@ export default class SwapiService {
             gravity: planet.gravity,
         }
     }
-
+    
     transformPerson = (person) => {
-        
+
         return {
             id: this.getId(person),
             name: person.name,
@@ -52,7 +52,6 @@ export default class SwapiService {
             homeworld: person.homeworld,
         }
     }
-    
 }
 
 
