@@ -3,6 +3,7 @@ import React from 'react';
 import './ItemsList.css'
 import SwapiService from '../../services/SwapiService';
 import Loader from '../Loader';
+// import Loader from '../Loader';
 
 export default class ItemsList extends React.Component {
 
@@ -10,56 +11,44 @@ export default class ItemsList extends React.Component {
 
     state = {
         people: null,
-        load: true
     }
 
-    componentDidMount(){
-       this.swapi.getAllPeople().then((people) => {
+    componentDidMount() {
+        this.swapi.getAllPeople().then((people) => {
             this.setState({
-                people,
+                people
             })
-        })
-        this.swapi.getAllPeople()
-            .then(this.onPeopleLoaded)
-
+        });
     }
 
-    getInfo(people) {
-        const element = people.map((el) => {
-            const itemPeople = el.name;
-            const id = el.id
+    renderItems(arr){
+        return arr.map((item) => {
             return (
-               <li key ={id}> {itemPeople} </li>
-            )
-        });
-        return element;
-    }
-
-    onPeopleLoaded = (people) => {
-        this.setState({
-            people,
-            load: false,
+                <li 
+                    className ="list-group-item" 
+                    key={item.id}
+                    onClick={() => {this.props.onItemClick(item.id)}}
+                >
+                    {item.name}
+                </li>
+            );
         });
     }
 
+    render() {
+        const { people } = this.state;
 
-    render () {
 
-        const { people, load } = this.state
+        if(!people) {
+            return <Loader />
+        }
 
-        const elements = people ? this.getInfo(people): null;
-        const loader = load ? <Loader /> : null;
-        
+        const items = this.renderItems(people);
 
-        return (
-            <div className='ItemsList'>
-                {loader}
-                <ul>
-                    {elements}
-                </ul>
-            </div>
+        return(
+            <ul className="ItemsList">
+                {items}
+            </ul>
         );
     }
-    
 }
-

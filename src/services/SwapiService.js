@@ -49,7 +49,7 @@ export default class SwapiService {
             name: person.name,
             gender: person.gender,
             mass: person.mass,
-            homeworld: person.homeworld,
+            birthDate: person.birth_year,
         }
     }
 }

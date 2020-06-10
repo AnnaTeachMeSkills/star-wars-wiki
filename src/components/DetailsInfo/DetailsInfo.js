@@ -1,30 +1,70 @@
 import React from 'react';
 
 import './DetailsInfo.css'
+import SwapiService from '../../services/SwapiService';
 
-const DetailsInfo = () => {
-    return (
-        <div className='DetailsInfo'>
-            <h3>Person Name</h3>
-            <div className='d-flex info_block'> 
-                <img src='https://icdn.lenta.ru/images/2017/07/18/14/20170718144141447/detail_31a0e9ced0c9d9d04485d31ecba8d169.jpg' alt='planet'/>
-                <ul className="detail_info_block"> 
-                    <li>
-                        <span>mass</span>
-                        <span>3000</span>
-                    </li>
-                    <li>
-                        <span>homeworld</span>
-                        <span>venera</span>
-                    </li>
-                    <li>
-                        <span>gender</span>
-                        <span>male</span>
-                    </li>
-                </ul>
+export default class DetailsInfo extends React.Component {
+    
+    swapi = new SwapiService();
+    
+    state = {
+        person: null,
+    };
+
+    componentDidMount () {
+        this.upDatePerson();
+    }
+
+    componentDidUpdate(prevProps) {
+        if(this.props.personId !== prevProps.personId){
+        this.upDatePerson();
+        }
+    }
+
+    upDatePerson() {
+        const { personId } = this.props;
+
+        if(!personId) {
+            return;
+        }
+
+        this.swapi.getPerson(personId).then((person) => {
+            this.setState({
+                person,
+            });
+        })
+    }
+
+    render () {
+        
+        if (!this.state.person) {
+            return <p> Please, select a person</p>
+        }
+
+        const { id, name, mass, birthDate, gender  } = this.state.person
+
+        return (
+            <div className='DetailsInfo'>
+                <h3>{name}</h3>
+                <div className='d-flex info_block'> 
+                    <img src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`} alt='person'/>
+                    <ul className="detail_info_block"> 
+                        <li>
+                            <span>mass</span>
+                            <span>{mass}</span>
+                        </li>
+                        <li>
+                            <span>birth date</span>
+                            <span>{birthDate}</span>
+                        </li>
+                        <li>
+                            <span>gender</span>
+                            <span>{gender}</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
-
-export default DetailsInfo;
+    
