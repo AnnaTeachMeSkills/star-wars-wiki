@@ -4,20 +4,28 @@ import './App.css';
 
 import Header from '../Header';
 import RandomPlanet from '../RandomPlanet';
+import SwapiService from '../../services/SwapiService';
+
+import ErrorTest from '../ErrorTest';
+import ErrorComponent from '../ErrorComponent';
+import PeoplePage from '../PeoplePage/PeoplePage';
 import ItemsList from '../ItemsList';
 import DetailsInfo from '../DetailsInfo';
-import ErrorTest from '../ErrorTest';
 
 
 export default class App extends React.Component {
 
+    swapi = new SwapiService();
+
     state = {
         isRandomPlanet: true,
-        selectedPerson: null,
+        error: false,
     }
 
     componentDidCatch () {
-        console.log('sdfg')
+        this.setState({
+            error: true,
+        })
     }
 
     onTogglePlanet = () => {
@@ -26,13 +34,12 @@ export default class App extends React.Component {
         });
     }
 
-    onPersonSelect = (id) => {
-        this.setState({
-            selectedPerson: id,
-        })
-    }
+    
 
     render() {
+        if (this.state.error) {
+            return <ErrorComponent />
+        }
         return (
             <div className='App'>
                 <Header />
@@ -42,13 +49,20 @@ export default class App extends React.Component {
                     on/off planet
                 </button>
                 <ErrorTest />
-                <div className='d-flex justify-content-between'> 
-                   <ItemsList onItemClick={this.onPersonSelect}/> 
-                   <DetailsInfo 
-                         personId ={this.state.selectedPerson} 
-                   />
-                </div>
-                
+                <PeoplePage />
+                <div className='PeoplePage d-flex justify-content-between'> 
+                    <ItemsList 
+                        onItemClick={this.onPersonSelect}
+                        getData = {this.swapi.getAllPlanet}
+                        renderItem={(item) => 
+                            `${item.name} 
+                            (diameter ${item.diameter})`}
+                    /> 
+                    <DetailsInfo 
+                        personId ={this.state.selectedPerson} 
+                    />
+            </div>
+               
             </div>
         )
     }
