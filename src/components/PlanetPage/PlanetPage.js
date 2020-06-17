@@ -5,13 +5,13 @@ import DetailsInfo from '../DetailsInfo';
 import ErrorComponent from '../ErrorComponent';
 import Row from '../Row';
 
-import './PeoplePage.css';
+import './PlanetPage.css';
 import SwapiService from '../../services/SwapiService';
 
 
 
 
-export default class PeoplePage extends React.Component {
+export default class PlanetPage extends React.Component {
 
     swapi = new SwapiService();
 
@@ -41,7 +41,7 @@ export default class PeoplePage extends React.Component {
                 onItemClick={this.onPersonSelect}
                 renderItem={(item) => 
                     `${item.name} 
-                    (${item.gender}, ${item.mass}kg)`}
+                    (${item.diameter}kg)`}
             /> 
         )
 

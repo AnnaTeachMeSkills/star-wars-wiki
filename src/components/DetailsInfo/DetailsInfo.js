@@ -3,6 +3,7 @@ import React from 'react';
 import './DetailsInfo.css'
 import SwapiService from '../../services/SwapiService';
 import ErrorTest from '../ErrorTest';
+import { SwapiConsumer } from '../SwapiServiceContext';
 
 export default class DetailsInfo extends React.Component {
     
@@ -45,27 +46,36 @@ export default class DetailsInfo extends React.Component {
         const { id, name, mass, birthDate, gender  } = this.state.person
 
         return (
-            <div className='DetailsInfo'>
-                <h3>{name}</h3>
-                <div className='info_block'> 
-                    <img src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`} alt='person'/>
-                    <ul className="detail_info_block"> 
-                        <li>
-                            <span>mass: </span>
-                            <span>{mass}</span>
-                        </li>
-                        <li>
-                            <span>birth date: </span>
-                            <span>{birthDate}</span>
-                        </li>
-                        <li>
-                            <span>gender: </span>
-                            <span>{gender}</span>
-                        </li>
-                    </ul>
-                </div>
-                <ErrorTest />
-            </div>
+            <SwapiConsumer >
+                {
+                    (swapi) => {
+                        return (
+                        <div className='DetailsInfo'>
+                            <h3>{name}</h3>
+                         <div className='info_block'> 
+                            <img src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`} alt='person'/>
+                            <ul className="detail_info_block"> 
+                                <li>
+                                    <span>mass: </span>
+                                    <span>{mass}</span>
+                                </li>
+                                <li>
+                                    <span>birth date: </span>
+                                    <span>{birthDate}</span>
+                                </li>
+                                <li>
+                                    <span>gender: </span>
+                                    <span>{gender}</span>
+                                </li>
+                            </ul>
+                            </div>
+                            <ErrorTest />
+                        </div>
+                        );
+                    }
+                }
+                
+            </SwapiConsumer>
         );
     }
 }
