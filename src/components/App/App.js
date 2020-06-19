@@ -11,8 +11,9 @@ import ErrorComponent from '../ErrorComponent';
 import PeoplePage from '../PeoplePage/PeoplePage';
 // import ItemsList from '../ItemsList';
 import PlanetPage from '../PlanetPage';
-import { SwapiProvider } from '../SwapiServiceContext';
+import SwapiContext  from '../SwapiServiceContext';
 // import DetailsInfo from '../DetailsInfo';
+import {BrowserRouter as Router, Route } from "react-router-dom";
 
 
 export default class App extends React.Component {
@@ -43,28 +44,43 @@ export default class App extends React.Component {
             return <ErrorComponent />
         }
         return (
-            <SwapiProvider value={this.swapi}>
-                <div className='App'>
-                    <Header />
-                    {this.state.isRandomPlanet && <RandomPlanet />}
-                    <ErrorTest />
-                    <PeoplePage />
-                    <PlanetPage />
-                    {/* <div className='PeoplePage d-flex justify-content-between'> 
-                        <ItemsList 
-                            onItemClick={this.onPersonSelect}
-                            getData = {this.swapi.getAllPlanet}
-                            renderItem={(item) => 
-                                `${item.name} 
-                                (diameter ${item.diameter})`}
-                        /> 
-                        <DetailsInfo 
-                            personId ={this.state.selectedPerson} 
-                        />
-                    </div> */}
+            <SwapiContext.Provider value={this.swapi}>
+                <Router>
+                    <div className='App'>
+                        <Header />
+                        {this.state.isRandomPlanet && <RandomPlanet />}
+                        <ErrorTest />
 
-                </div>
-            </SwapiProvider>
+                        <Route path="/" exact>
+                            <h3>Hello, my dear friend</h3>
+                        </Route >  
+                        <Route path="/people">
+                            <h3>People</h3>
+                            <PeoplePage />
+                        </Route >
+                        <Route path="/planets">
+                            <h3>Planets</h3>
+                            <PlanetPage />
+                        </Route >
+
+                        {/* <PeoplePage />
+                        <PlanetPage /> */}
+                        {/* <div className='PeoplePage d-flex justify-content-between'> 
+                            <ItemsList 
+                                onItemClick={this.onPersonSelect}
+                                getData = {this.swapi.getAllPlanet}
+                                renderItem={(item) => 
+                                    `${item.name} 
+                                    (diameter ${item.diameter})`}
+                            /> 
+                            <DetailsInfo 
+                                personId ={this.state.selectedPerson} 
+                            />
+                        </div> */}
+
+                    </div>
+                </Router>
+            </SwapiContext.Provider>
         )
     }
     

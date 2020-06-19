@@ -1,14 +1,13 @@
 import React from 'react';
 
-import './DetailsInfo.css'
-import SwapiService from '../../services/SwapiService';
+import './DetailsInfo.css';
 import ErrorTest from '../ErrorTest';
-import { SwapiConsumer } from '../SwapiServiceContext';
+import SwapiContext from '../SwapiServiceContext';
 
 export default class DetailsInfo extends React.Component {
     
-    swapi = new SwapiService();
-    
+    static contextType = SwapiContext;
+        
     state = {
         person: null,
     };
@@ -30,7 +29,7 @@ export default class DetailsInfo extends React.Component {
             return;
         }
 
-        this.swapi.getPerson(personId).then((person) => {
+        this.context.getPerson(personId).then((person) => {
             this.setState({
                 person,
             });
@@ -46,12 +45,8 @@ export default class DetailsInfo extends React.Component {
         const { id, name, mass, birthDate, gender  } = this.state.person
 
         return (
-            <SwapiConsumer >
-                {
-                    (swapi) => {
-                        return (
-                        <div className='DetailsInfo'>
-                            <h3>{name}</h3>
+                <div className='DetailsInfo'>
+                        <h3>{name}</h3>
                          <div className='info_block'> 
                             <img src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`} alt='person'/>
                             <ul className="detail_info_block"> 
@@ -68,15 +63,10 @@ export default class DetailsInfo extends React.Component {
                                     <span>{gender}</span>
                                 </li>
                             </ul>
-                            </div>
-                            <ErrorTest />
                         </div>
-                        );
-                    }
-                }
-                
-            </SwapiConsumer>
+                        <ErrorTest />
+                </div>
+                       
         );
     }
 }
-    
