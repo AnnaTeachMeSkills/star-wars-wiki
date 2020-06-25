@@ -42,7 +42,7 @@ export default class DetailsInfo extends React.Component {
             return <p> Please, select a person</p>
         }
 
-        const { id, name, mass, birthDate, gender  } = this.state.person
+        const { id, name, mass, birthDate, gender, hairColor, height, skinColor, } = this.state.person
 
         return (
                 <div className='DetailsInfo'>
@@ -61,6 +61,18 @@ export default class DetailsInfo extends React.Component {
                                 <li>
                                     <span>gender: </span>
                                     <span>{gender}</span>
+                                </li>
+                                <li>
+                                    <span>hair color: </span>
+                                    <span>{hairColor}</span>
+                                </li>
+                                <li>
+                                    <span>height: </span>
+                                    <span>{height}</span>
+                                </li>
+                                <li>
+                                    <span>skin color: </span>
+                                    <span>{skinColor}</span>
                                 </li>
                             </ul>
                         </div>
