@@ -1,7 +1,7 @@
 import React from 'react';
 
-import ItemsList from '../ItemsList';
-import DetailsInfo from '../DetailsInfo';
+import PlanetsList from '../PlanetsList';
+import PlanetInfo from '../PlanetInfo';
 import ErrorComponent from '../ErrorComponent';
 import Row from '../Row';
 
@@ -37,16 +37,17 @@ export default class PlanetPage extends React.Component {
         }
 
         const itemsList = (
-            <ItemsList 
+            <PlanetsList 
                 onItemClick={this.onPersonSelect}
                 renderItem={(item) => 
                     `${item.name} 
-                    (${item.diameter}kg)`}
+                    (diameter ${item.diameter})`}
             /> 
         )
 
         const detailsInfo = (
-            <DetailsInfo 
+            <PlanetInfo 
+                getData={this.swapi.getPlanet}
                 personId ={this.state.selectedPerson} 
             />
         )

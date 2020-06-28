@@ -17,14 +17,14 @@ export default class RandomPlanet extends React.Component {
        error: false,
     }
 
-    // componentDidMount () {
-    //     this.upDatePlanet();
-    //     this.interval = setInterval(this.upDatePlanet, 5000);
-    // }
+    componentDidMount () {
+        this.upDatePlanet();
+        this.interval = setInterval(this.upDatePlanet, 5000);
+    }
 
-    // componentWillUnmount(){
-    //     clearInterval(this.interval);
-    // }
+    componentWillUnmount(){
+        clearInterval(this.interval);
+    }
 
     onPlanetLoaded = (planet) => {
         this.setState({

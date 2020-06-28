@@ -6,14 +6,13 @@ import Header from '../Header';
 import RandomPlanet from '../RandomPlanet';
 import SwapiService from '../../services/SwapiService';
 
-import ErrorTest from '../ErrorTest';
+
 import ErrorComponent from '../ErrorComponent';
-import PeoplePage from '../PeoplePage/PeoplePage';
-// import ItemsList from '../ItemsList';
+import PeoplePage from '../PeoplePage';
 import PlanetPage from '../PlanetPage';
 import SwapiContext  from '../SwapiServiceContext';
-// import DetailsInfo from '../DetailsInfo';
 import {BrowserRouter as Router, Route } from "react-router-dom";
+import StarshipPage from '../StarshipPage';
 
 
 export default class App extends React.Component {
@@ -49,10 +48,9 @@ export default class App extends React.Component {
                     <div className='App'>
                         <Header />
                         {this.state.isRandomPlanet && <RandomPlanet />}
-                        <ErrorTest />
 
                         <Route path="/" exact>
-                            <h3>Hello, my dear friend</h3>
+                            <h3>Hello, my dear friend!</h3>
                         </Route >  
                         <Route path="/people">
                             <h3>People</h3>
@@ -62,22 +60,10 @@ export default class App extends React.Component {
                             <h3>Planets</h3>
                             <PlanetPage />
                         </Route >
-
-                        {/* <PeoplePage />
-                        <PlanetPage /> */}
-                        {/* <div className='PeoplePage d-flex justify-content-between'> 
-                            <ItemsList 
-                                onItemClick={this.onPersonSelect}
-                                getData = {this.swapi.getAllPlanet}
-                                renderItem={(item) => 
-                                    `${item.name} 
-                                    (diameter ${item.diameter})`}
-                            /> 
-                            <DetailsInfo 
-                                personId ={this.state.selectedPerson} 
-                            />
-                        </div> */}
-
+                        <Route path="/starships">
+                            <h3>Starships</h3>
+                            <StarshipPage />
+                        </Route >
                     </div>
                 </Router>
             </SwapiContext.Provider>

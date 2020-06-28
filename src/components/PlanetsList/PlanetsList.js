@@ -1,10 +1,10 @@
 import React from 'react';
 
-import './ItemsList.css'
+import './PlanetsList.css'
 import withData from '../helpers/withData';
 import SwapiService from '../../services/SwapiService';
 
- const ItemsList = (props) => {
+ const PlanetsList = (props) => {
 
   const {data, onItemClick, renderItem} = props;
 
@@ -26,7 +26,7 @@ import SwapiService from '../../services/SwapiService';
     const items = renderItems(data);
 
     return(
-        <ul className="ItemsList">
+        <ul className="PlanetsList">
              {items}
         </ul>
     );
@@ -36,7 +36,7 @@ import SwapiService from '../../services/SwapiService';
 
 
 
-const { getAllPeople} = new SwapiService();
+const { getAllPlanet} = new SwapiService();
 
 
-export default withData(ItemsList, getAllPeople);
+export default withData(PlanetsList, getAllPlanet);

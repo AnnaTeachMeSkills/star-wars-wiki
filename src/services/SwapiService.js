@@ -33,6 +33,16 @@ export default class SwapiService {
         return this.transformPlanet(planet);
     }
 
+    getAllStarships = async  () => {
+        const responce = await this.getData('/starships/');
+        return responce.results.map(this.transformStarships);
+    }
+
+    async getStarship (id) {
+        const starships = await this.getData(`/starships/${id}/`);
+        return this.transformStarships(starships);
+    }
+
     getId (item) {
         return item.url.match(/\/([0-9]*)\/$/)[1];
     }
@@ -45,6 +55,9 @@ export default class SwapiService {
             diameter: planet.diameter,
             population: planet.population,
             gravity: planet.gravity,
+            climate: planet.climate,
+            rotationPeriod: planet.rotation_period,
+
         }
     }
     
@@ -61,7 +74,28 @@ export default class SwapiService {
             skinColor: person.skin_color,
         }
     }
+
+
+    transformStarships = (starships) => {
+
+        return {
+            id: this.getId(starships),
+            name: starships.name,
+            model: starships.model,
+            manufacturer: starships.manufacturer,
+            length: starships.length,
+            maxSpeed: starships.max_atmosphering_speed,
+            passengers: starships.passengers,
+            consumables: starships.consumables,
+            crew: starships.crew,
+        }
+    }
+
+
+
 }
+
+
 
 
 

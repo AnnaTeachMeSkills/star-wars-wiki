@@ -1,10 +1,9 @@
 import React from 'react';
 
-import './DetailsInfo.css';
-import ErrorTest from '../ErrorTest';
+import './PeopleInfo.css';
 import SwapiContext from '../SwapiServiceContext';
 
-export default class DetailsInfo extends React.Component {
+export default class PeopleInfo extends React.Component {
     
     static contextType = SwapiContext;
         
@@ -39,13 +38,13 @@ export default class DetailsInfo extends React.Component {
     render () {
         
         if (!this.state.person) {
-            return <p> Please, select a person</p>
+            return <p className="chooseItem"> Please, choose a person!</p>
         }
 
-        const { id, name, mass, birthDate, gender, hairColor, height, skinColor, } = this.state.person
+        const { id, name, mass, birthDate, gender, hairColor, height, skinColor,   } = this.state.person
 
         return (
-                <div className='DetailsInfo'>
+                <div className='PeopleInfo'>
                         <h3>{name}</h3>
                          <div className='info_block'> 
                             <img src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`} alt='person'/>
@@ -76,7 +75,6 @@ export default class DetailsInfo extends React.Component {
                                 </li>
                             </ul>
                         </div>
-                        <ErrorTest />
                 </div>
                        
         );

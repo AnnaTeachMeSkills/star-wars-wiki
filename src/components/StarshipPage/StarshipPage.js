@@ -1,22 +1,22 @@
 import React from 'react';
 
-import PeopleList from '../PeopleList';
-import PeopleInfo from '../PeopleInfo';
+import StarshipList from '../StarshipList';
+import StarshipInfo from '../StarshipInfo';
 import ErrorComponent from '../ErrorComponent';
 import Row from '../Row';
 
-import './PeoplePage.css';
+import './StarshipPage.css';
 import SwapiService from '../../services/SwapiService';
 
 
 
 
-export default class PeoplePage extends React.Component {
+export default class StarshipPage extends React.Component {
 
     swapi = new SwapiService();
 
     state= {
-        selectedPerson: null,
+        selectedShip: null,
         error: false,
     }
 
@@ -24,9 +24,9 @@ export default class PeoplePage extends React.Component {
         this.setState({error:true})
     }
 
-    onPersonSelect = (id) => {
+    onShipSelect = (id) => {
         this.setState({
-            selectedPerson: id,
+            selectedShip: id,
         })
     }
 
@@ -36,28 +36,25 @@ export default class PeoplePage extends React.Component {
             return <ErrorComponent />
         }
 
-        const itemsList = (
-            <PeopleList 
-                onItemClick={this.onPersonSelect}
+        const stapshipList = (
+            <StarshipList 
+                onItemClick={this.onShipSelect}
                 renderItem={(item) => 
                     `${item.name} 
-                    (${item.gender}, ${item.mass}kg)`}
+                    (${item.model})`}
             /> 
         )
 
-        const peopleInfo = (
-            <PeopleInfo 
-                personId ={this.state.selectedPerson} 
+        const starshipInfo = (
+            <StarshipInfo 
+                personId ={this.state.selectedShip} 
             />
         )
 
         return (
-            <div className='PeoplePage'> 
-                <Row left={itemsList} right={peopleInfo}/>
+            <div className='StarshipPage'> 
+                <Row left={stapshipList} right={starshipInfo}/>
             </div>
         )
     }
 }
-
-
-

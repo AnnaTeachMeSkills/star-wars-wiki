@@ -1,11 +1,11 @@
-.DetailsInfo {
+.StarshipInfo {
     background-color: rgb(18, 18, 68);
     padding: 15px;
     border-radius: 10px;
     text-align: center;
 }
 
-.DetailsInfo .info_block{
+.StarshipInfo .info_block{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -13,11 +13,11 @@
     
 }
 
-.DetailsInfo .info_block img {
+.StarshipInfo .info_block img {
     width:40%;
 }
 
-.DetailsInfo .detail_info_block {
+.StarshipInfo .detail_info_block {
     list-style: none;
     padding-left: 15px;
 }
