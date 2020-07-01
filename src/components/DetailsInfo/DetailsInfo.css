@@ -1,11 +1,11 @@
-.StarshipInfo {
+.DetailsInfo {
     background-color: rgb(18, 18, 68);
     padding: 15px;
     border-radius: 10px;
     text-align: center;
 }
 
-.StarshipInfo .info_block{
+.DetailsInfo .info_block{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -13,11 +13,11 @@
     
 }
 
-.StarshipInfo .info_block img {
+.DetailsInfo .info_block img {
     width:40%;
 }
 
-.StarshipInfo .detail_info_block {
+.DetailsInfo .detail_info_block {
     list-style: none;
     padding-left: 15px;
 }
@@ -25,4 +25,10 @@
 .detail_info_block li{
     font-size: 24px;
     margin-bottom: 10px;
+}
+
+.chooseItem{
+    font-size: 30px;
+    text-align: center;
+    
 }

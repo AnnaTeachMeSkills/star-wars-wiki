@@ -1,7 +1,7 @@
 import React from 'react';
 
 import PlanetsList from '../PlanetsList';
-import PlanetInfo from '../PlanetInfo';
+import DetailsInfo from '../DetailsInfo';
 import ErrorComponent from '../ErrorComponent';
 import Row from '../Row';
 
@@ -44,11 +44,15 @@ export default class PlanetPage extends React.Component {
                     (diameter ${item.diameter})`}
             /> 
         )
-
+ 
         const detailsInfo = (
-            <PlanetInfo 
-                getData={this.swapi.getPlanet}
+            <DetailsInfo 
+                getInfo={this.swapi.getPlanet}
                 personId ={this.state.selectedPerson} 
+                addInfo={
+                    ['diameter', 'population', 'gravity', 'climate', "rotationPeriod"]
+                }
+                img={`https://starwars-visualguide.com/assets/img/planets/`}
             />
         )
 

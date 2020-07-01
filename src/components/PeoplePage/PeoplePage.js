@@ -1,7 +1,7 @@
 import React from 'react';
 
 import PeopleList from '../PeopleList';
-import PeopleInfo from '../PeopleInfo';
+import DetailsInfo from '../DetailsInfo';
 import ErrorComponent from '../ErrorComponent';
 import Row from '../Row';
 
@@ -46,8 +46,13 @@ export default class PeoplePage extends React.Component {
         )
 
         const peopleInfo = (
-            <PeopleInfo 
+            <DetailsInfo 
+                getInfo = {this.swapi.getPerson}
                 personId ={this.state.selectedPerson} 
+                addInfo={
+                    ['gender', 'mass', 'birthDate', 'hairColor', "height", "skinColor" ]
+                }
+                img={`https://starwars-visualguide.com/assets/img/characters/`}
             />
         )
 

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import StarshipList from '../StarshipList';
-import StarshipInfo from '../StarshipInfo';
+import DetailsInfo from '../DetailsInfo';
 import ErrorComponent from '../ErrorComponent';
 import Row from '../Row';
 
@@ -46,8 +46,13 @@ export default class StarshipPage extends React.Component {
         )
 
         const starshipInfo = (
-            <StarshipInfo 
+            <DetailsInfo 
                 personId ={this.state.selectedShip} 
+                getInfo={this.swapi.getStarship}
+                addInfo={
+                    ['model', 'manufacturer', 'length', 'maxSpeed', "passengers", "consumables", "crew"]
+                }
+                img={`https://starwars-visualguide.com/assets/img/starships/`}
             />
         )
 
