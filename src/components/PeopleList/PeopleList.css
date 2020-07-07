@@ -9,3 +9,5 @@
     justify-content: space-around;
 
 }
+
+.list-group-item{cursor: pointer;}
